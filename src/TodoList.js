@@ -10,7 +10,7 @@ class TodoList extends React.Component {
     const todos = JSON.parse(items)
     console.log(todos)
     this.state = {
-      todos: todos
+      todos: todos ? todos : []
     }
     this.deleteTodo = this.deleteTodo.bind(this);
     this.addTodo = this.addTodo.bind(this);
@@ -33,6 +33,9 @@ class TodoList extends React.Component {
         todo.id !== id
       ))
     }))
+    setTimeout(() => {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos))
+    }, 1000)
   }
   editedTodo(edited) {
     this.setState(state => ({
@@ -44,6 +47,9 @@ class TodoList extends React.Component {
         }
       })
     }))
+    setTimeout(() => {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos))
+    }, 1000)
   }
   setComplete(id) {
     this.setState(state => ({
@@ -55,6 +61,9 @@ class TodoList extends React.Component {
         }
       })
     }))
+    setTimeout(() => {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos))
+    }, 1000)
   }
   render() {
     return (
