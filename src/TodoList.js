@@ -11,13 +11,15 @@ class TodoList extends React.Component {
     const todos = JSON.parse(items)
     this.state = {
       todos: todos ? todos : [],
-      searchText: ''
+      searchText: '',
+      hideCompleted: false
     }
     this.deleteTodo = this.deleteTodo.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.editedTodo = this.editedTodo.bind(this);
     this.setComplete = this.setComplete.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
+    this.hideCompleted = this.hideCompleted.bind(this);
   }
   addTodo(newTodo) {
     newTodo = {...newTodo, id: uuid()}
@@ -74,18 +76,36 @@ class TodoList extends React.Component {
     })
   }
   filterTodos() {
-    return this.state.todos.filter(todo => 
-      todo.text.toLowerCase().includes(this.state.searchText.toLowerCase()))
-        .map(todo => (
-          <Todo 
-            key={todo.id}
-            setComplete={this.setComplete} 
-            editedTodo={this.editedTodo} 
-            deleteTodo={this.deleteTodo} 
-            todo={todo} 
-          />
-        )
-      )
+    if(this.state.hideCompleted) {
+      return this.state.todos.filter(todo => !todo.completed)
+      .map(todo => (
+        <Todo 
+          key={todo.id}
+          setComplete={this.setComplete} 
+          editedTodo={this.editedTodo} 
+          deleteTodo={this.deleteTodo} 
+          todo={todo} 
+        />
+      ))
+    } else {
+        return this.state.todos.filter(todo => 
+          todo.text.toLowerCase().includes(this.state.searchText.toLowerCase()))
+            .map(todo => (
+              <Todo 
+                key={todo.id}
+                setComplete={this.setComplete} 
+                editedTodo={this.editedTodo} 
+                deleteTodo={this.deleteTodo} 
+                todo={todo} 
+              />
+            )
+          )
+      }
+  }
+  hideCompleted() {
+    this.setState(state => ({
+      hideCompleted: !state.hideCompleted
+    }))
   }
   render() {
     return (
@@ -100,6 +120,9 @@ class TodoList extends React.Component {
         <div>
         {this.filterTodos()}
         </div>
+        <button onClick={this.hideCompleted}>
+        {this.state.hideCompleted ? 'show all' : 'hide completed'}
+        </button>
       </div>
     )
   }
