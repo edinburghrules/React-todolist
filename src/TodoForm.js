@@ -24,17 +24,16 @@ class TodoForm extends React.Component {
   }
   render() {
     return (
-      <div>
-        <form onSubmit={this.submitTodo}>
-          <label htmlFor="text">Text:</label>
-          <input 
+        <form className="todo-form" onSubmit={this.submitTodo}>
+          <label className="todo-form__lbl" htmlFor="text">Text:</label>
+          <input
+            className="todo-form__input"
             name="text"
             value={this.state.text}
             onChange={this.onChange}
           />
-          <button>add todo</button>
+          <button className="todo-form__btn">add todo</button>
         </form>
-      </div>
     )
   }
 }

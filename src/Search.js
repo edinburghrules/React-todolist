@@ -2,8 +2,9 @@ import React from 'react';
 
 const Search = (props) => {
   return (
-    <div>
-      <input 
+    <div className="search-form">
+      <input
+        className="search-form__input" 
         placeholder="Search todos"
         onChange={props.setSearchText}
       />
@@ -12,8 +13,4 @@ const Search = (props) => {
   )
 }
   
-
-
-
-
 export default Search;

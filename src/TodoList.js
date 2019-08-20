@@ -109,8 +109,8 @@ class TodoList extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h1>Todo List</h1>
+      <div className="container">
+        <h1 className="app-title">Todo List</h1>
         <div>
           <TodoForm addTodo={this.addTodo} />
         </div>
@@ -118,10 +118,10 @@ class TodoList extends React.Component {
           <Search setSearchText={this.setSearchText} />
         </div>
         <div>
-        {this.filterTodos()}
+          {this.filterTodos()}
         </div>
-        <button onClick={this.hideCompleted}>
-        {this.state.hideCompleted ? 'show all' : 'hide completed'}
+        <button className="btn" onClick={this.hideCompleted}>
+          {this.state.hideCompleted ? 'show all' : 'hide completed'}
         </button>
       </div>
     )
