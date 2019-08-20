@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from './Todo';
 import TodoForm from './TodoForm';
+import Search from './Search';
 import uuid from 'uuid';
 
 class TodoList extends React.Component {
@@ -8,14 +9,15 @@ class TodoList extends React.Component {
     super(props);
     const items = localStorage.getItem('todos')
     const todos = JSON.parse(items)
-    console.log(todos)
     this.state = {
-      todos: todos ? todos : []
+      todos: todos ? todos : [],
+      searchText: ''
     }
     this.deleteTodo = this.deleteTodo.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.editedTodo = this.editedTodo.bind(this);
     this.setComplete = this.setComplete.bind(this);
+    this.setSearchText = this.setSearchText.bind(this);
   }
   addTodo(newTodo) {
     newTodo = {...newTodo, id: uuid()}
@@ -65,6 +67,26 @@ class TodoList extends React.Component {
       localStorage.setItem('todos', JSON.stringify(this.state.todos))
     }, 1000)
   }
+  setSearchText(e) {
+    const searchTerm = e.target.value;
+    this.setState({
+      searchText: searchTerm
+    })
+  }
+  filterTodos() {
+    return this.state.todos.filter(todo => 
+      todo.text.toLowerCase().includes(this.state.searchText.toLowerCase()))
+        .map(todo => (
+          <Todo 
+            key={todo.id}
+            setComplete={this.setComplete} 
+            editedTodo={this.editedTodo} 
+            deleteTodo={this.deleteTodo} 
+            todo={todo} 
+          />
+        )
+      )
+  }
   render() {
     return (
       <div>
@@ -72,17 +94,12 @@ class TodoList extends React.Component {
         <div>
           <TodoForm addTodo={this.addTodo} />
         </div>
-        {
-          this.state.todos.map((todo, index) => (
-            <Todo 
-              key={todo.id}
-              setComplete={this.setComplete} 
-              editedTodo={this.editedTodo} 
-              deleteTodo={this.deleteTodo} 
-              todo={todo} 
-            />
-          ))
-        }
+        <div>
+          <Search setSearchText={this.setSearchText} />
+        </div>
+        <div>
+        {this.filterTodos()}
+        </div>
       </div>
     )
   }
