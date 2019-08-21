@@ -39,10 +39,10 @@ class Todo extends React.Component {
           <p id="todo-text"className={completed ? 'completed' : 'incomplete'} onClick={this.isComplete}>{text}</p>
           <div className="todo__btns">
             <button className="todo__btn todo__btn--edit" onClick={this.isEditing}>
-            <i className="fas fa-pencil-alt"></i>
+            <i className="fas fa-edit"></i>
             </button>
             <button className="todo__btn todo__btn--delete" onClick={() => this.props.deleteTodo(id)}>
-              <i className="fas fa-trash-alt"></i>
+              <i className="fas fa-times"></i>
             </button>
           </div>  
         </div>
@@ -54,7 +54,7 @@ class Todo extends React.Component {
               value={this.state.text}
               onChange={this.editTodo}
             />
-            <button className="editing-todo__form__btn"><i className="far fa-check-circle tick"></i></button>
+            <button className="editing-todo__form__btn"><i className="fas fa-check tick"></i></button>
           </form>
         </div>
       }

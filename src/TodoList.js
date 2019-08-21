@@ -20,6 +20,7 @@ class TodoList extends React.Component {
     this.setComplete = this.setComplete.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
     this.hideCompleted = this.hideCompleted.bind(this);
+    this.markAll = this.markAll.bind(this);
   }
   addTodo(newTodo) {
     newTodo = {...newTodo, id: uuid()}
@@ -108,14 +109,27 @@ class TodoList extends React.Component {
       hideCompleted: !state.hideCompleted
     }))
   }
+  markAll() {
+    this.setState(state => ({
+      todos: state.todos.map(todo => {
+        return {...todo, completed: true }
+      })
+    }))
+  }
   render() {
-    const noOfCompleted = () => {
+    const incompleteTodos = () => {
+      return this.state.todos.filter(todo => !todo.completed).length
+    }
+    const completeTodos = () => {
       return this.state.todos.filter(todo => todo.completed).length
     }
     return (
       <div className="container">
         <div>
           <TodoForm addTodo={this.addTodo} />
+        </div>
+        <div className="mark-all">
+          <button className="mark-all__btn" onClick={this.markAll}>Mark all complete <i className="fas fa-check-double"></i></button>
         </div>
         <div className="line-break"></div>
         <div>
@@ -126,10 +140,8 @@ class TodoList extends React.Component {
         </div>
         <div className="line-break"></div>
         <div className="footer">
-          <p className="footer_info">
-            <span>{this.filterTodos().length > 0 ?this.filterTodos().length - noOfCompleted() : '0'} </span> 
-          todos left</p>
-          <button disabled={noOfCompleted() < 1} className="footer__btn" onClick={this.hideCompleted}>
+          <p className="footer_info"><span>{incompleteTodos()}</span> todos left</p>
+          <button disabled={completeTodos() === 0}  className="footer__btn" onClick={this.hideCompleted}>
             {this.state.hideCompleted ? 'show all' : 'hide completed'}
           </button>
         </div>
@@ -139,3 +151,5 @@ class TodoList extends React.Component {
 }
 
 export default TodoList;
+
+
