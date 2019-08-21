@@ -1,0 +1,73 @@
+#todo-text {
+  cursor: pointer;
+}
+
+.todo {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    border-bottom: 2px solid #f1f1f1;
+    &:nth-child(2) {
+      color: red;
+    }
+  }
+
+  &__btns {
+    color: #d1d1d1;
+  }
+
+  &__btn {
+    all: unset;
+    cursor: pointer;
+    align-self: center;
+    font-size: 1.2rem;
+    padding: 0 0.5rem;
+    height: 1rem;
+    width: 1rem;
+  }
+
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.editing-todo {
+  display: flex;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid transparent;
+
+  &__form {
+
+    &__input {
+      all: unset;
+      border-bottom: 2px solid #f1f1f1;
+      margin-right: 1rem;
+      color: #8888;
+      font-style: italic;
+      background-color: #fafafa;
+    }
+
+    &__btn {
+      all: unset;
+      cursor: pointer;
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+
+  }
+
+
+}
+
+.tick {
+  color: #00bdaa;
+  cursor: pointer;
+}

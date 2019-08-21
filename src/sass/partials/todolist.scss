@@ -1,0 +1,45 @@
+.container {
+  background-color: #fff;
+  width: 50%;
+  margin: 4rem auto;
+  padding: 1.2rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 14px 14px #ccc;
+}
+
+.todos {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.line-break {
+  border-bottom: 1px solid #f2f2f2;
+  margin: 2rem 0 1rem 0;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+
+  &__btn {
+    all: unset;
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    &:disabled {
+      color: #e1e1e1;
+    }
+  }
+
+  &__info {
+    all: unset;
+    font-size: 0.9rem;
+  }
+
+}
+
+span {
+  font-weight: 600;
+}
+

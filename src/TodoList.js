@@ -29,7 +29,6 @@ class TodoList extends React.Component {
     setTimeout(() => {
       localStorage.setItem('todos', JSON.stringify(this.state.todos))
     }, 1000)
-    
   }
   deleteTodo(id) {
     this.setState(state => ({
@@ -87,20 +86,22 @@ class TodoList extends React.Component {
           todo={todo} 
         />
       ))
-    } else {
-        return this.state.todos.filter(todo => 
-          todo.text.toLowerCase().includes(this.state.searchText.toLowerCase()))
-            .map(todo => (
-              <Todo 
-                key={todo.id}
-                setComplete={this.setComplete} 
-                editedTodo={this.editedTodo} 
-                deleteTodo={this.deleteTodo} 
-                todo={todo} 
-              />
-            )
+    } 
+    else {
+      const filteredTodos = this.state.todos.filter(todo => 
+        todo.text.toLowerCase().includes(this.state.searchText.toLowerCase()))
+          .map(todo => (
+            <Todo
+              key={todo.id}
+              setComplete={this.setComplete} 
+              editedTodo={this.editedTodo} 
+              deleteTodo={this.deleteTodo} 
+              todo={todo} 
+            />
           )
-      }
+        )
+        return filteredTodos;
+    } 
   }
   hideCompleted() {
     this.setState(state => ({
@@ -108,21 +109,30 @@ class TodoList extends React.Component {
     }))
   }
   render() {
+    const noOfCompleted = () => {
+      return this.state.todos.filter(todo => todo.completed).length
+    }
     return (
       <div className="container">
-        <h1 className="app-title">Todo List</h1>
         <div>
           <TodoForm addTodo={this.addTodo} />
         </div>
+        <div className="line-break"></div>
         <div>
           <Search setSearchText={this.setSearchText} />
         </div>
-        <div>
+        <div className="todos">
           {this.filterTodos()}
         </div>
-        <button className="btn" onClick={this.hideCompleted}>
-          {this.state.hideCompleted ? 'show all' : 'hide completed'}
-        </button>
+        <div className="line-break"></div>
+        <div className="footer">
+          <p className="footer_info">
+            <span>{this.filterTodos().length > 0 ?this.filterTodos().length - noOfCompleted() : '0'} </span> 
+          todos left</p>
+          <button disabled={noOfCompleted() < 1} className="footer__btn" onClick={this.hideCompleted}>
+            {this.state.hideCompleted ? 'show all' : 'hide completed'}
+          </button>
+        </div>
       </div>
     )
   }

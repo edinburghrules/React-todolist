@@ -1,0 +1,21 @@
+.search-form {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-start;
+
+
+  &__input {
+    all: unset;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 2px solid #f1f1f1;
+    height: 0.5rem;
+    padding: 1rem;
+
+    &::placeholder {
+      color: #aaa;
+    }
+
+  }
+
+}

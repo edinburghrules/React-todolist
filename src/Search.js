@@ -5,7 +5,7 @@ const Search = (props) => {
     <div className="search-form">
       <input
         className="search-form__input" 
-        placeholder="Search todos"
+        placeholder="Search todos..."
         onChange={props.setSearchText}
       />
     </div>

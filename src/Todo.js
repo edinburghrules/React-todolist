@@ -35,20 +35,26 @@ class Todo extends React.Component {
     return (
       <div>
       {!this.state.isEditing && 
-        <div>
-          <p className={completed ? 'completed' : 'incomplete'} onClick={this.isComplete}>{text}</p>
-          <button onClick={() => this.props.deleteTodo(id)}>x</button>
-          <button onClick={this.isEditing}>edit</button>
-          </div>
+        <div className="todo">
+          <p id="todo-text"className={completed ? 'completed' : 'incomplete'} onClick={this.isComplete}>{text}</p>
+          <div className="todo__btns">
+            <button className="todo__btn todo__btn--edit" onClick={this.isEditing}>
+            <i className="fas fa-pencil-alt"></i>
+            </button>
+            <button className="todo__btn todo__btn--delete" onClick={() => this.props.deleteTodo(id)}>
+              <i className="fas fa-trash-alt"></i>
+            </button>
+          </div>  
+        </div>
       }
       {this.state.isEditing &&
-        <div>
-          <form onSubmit={this.saveTodo}>
-            <input
+        <div className="editing-todo">
+          <form className="editing-todo__form" onSubmit={this.saveTodo}>
+            <input autoFocus className="editing-todo__form__input"
               value={this.state.text}
               onChange={this.editTodo}
             />
-            <button>save</button>
+            <button className="editing-todo__form__btn"><i className="far fa-check-circle tick"></i></button>
           </form>
         </div>
       }
