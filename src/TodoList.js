@@ -20,7 +20,9 @@ class TodoList extends React.Component {
     this.setComplete = this.setComplete.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
     this.hideCompleted = this.hideCompleted.bind(this);
-    this.markAll = this.markAll.bind(this);
+    this.markAllComplete = this.markAllComplete.bind(this);
+    this.markAllIncomplete = this.markAllIncomplete.bind(this);
+    this.deleteCompleted = this.deleteCompleted.bind(this);
   }
   addTodo(newTodo) {
     newTodo = {...newTodo, id: uuid()}
@@ -109,12 +111,35 @@ class TodoList extends React.Component {
       hideCompleted: !state.hideCompleted
     }))
   }
-  markAll() {
+  markAllComplete() {
     this.setState(state => ({
       todos: state.todos.map(todo => {
         return {...todo, completed: true }
       })
     }))
+    setTimeout(() => {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos))
+    }, 1000)
+  }
+  markAllIncomplete() {
+    this.setState(state => ({
+      todos: state.todos.map(todo => {
+        return {...todo, completed: false }
+      })
+    }))
+    setTimeout(() => {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos))
+    }, 1000)
+  }
+  deleteCompleted() {
+    this.setState(state => ({
+      todos: state.todos.filter(todo => {
+        return !todo.completed
+      })
+    }))
+    setTimeout(() => {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos))
+    }, 1000)
   }
   render() {
     const incompleteTodos = () => {
@@ -129,7 +154,18 @@ class TodoList extends React.Component {
           <TodoForm addTodo={this.addTodo} />
         </div>
         <div className="mark-all">
-          <button className="mark-all__btn" onClick={this.markAll}>Mark all complete <i className="fas fa-check-double"></i></button>
+          <button 
+            className="mark-all__btn mark-all__btn--complete" 
+            onClick={this.markAllComplete}>
+            <i className="fas fa-check-double"></i>
+            Mark all complete 
+          </button>
+          <button 
+            className="mark-all__btn mark-all__btn--incomplete" 
+            onClick={this.markAllIncomplete}>
+            <i className="fas fa-exclamation"></i>
+            Mark all incomplete
+          </button>
         </div>
         <div className="line-break"></div>
         <div>
@@ -143,6 +179,12 @@ class TodoList extends React.Component {
           <p className="footer_info"><span>{incompleteTodos()}</span> todos left</p>
           <button disabled={completeTodos() === 0}  className="footer__btn" onClick={this.hideCompleted}>
             {this.state.hideCompleted ? 'show all' : 'hide completed'}
+          </button>
+          <button
+            disabled={completeTodos() === 0}
+            className="footer__btn footer__btn--delete-all" 
+            onClick={this.deleteCompleted}>
+            Delete all completed
           </button>
         </div>
       </div>

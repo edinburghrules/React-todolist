@@ -10,14 +10,38 @@
 .mark-all {
   margin-top: 1rem;
 
+  & > :first-child {
+    margin-right: 1rem;
+    color: #00bdaa;
+    border-bottom: 2px solid transparent;
+    
+      &:hover {
+        border-bottom: 2px solid #00bdaa;
+      }
+    
+    & > :first-child {
+      margin-right: .3rem;
+    }
+  }
+
+  & > :last-child {
+    margin-right: 1rem;
+    color: #f77754;
+    border-bottom: 2px solid transparent;
+
+    &:hover {
+      border-bottom: 2px solid #f77754;
+    }
+
+    & > :first-child {
+      margin-right: .3rem;
+    }
+  }
+
   &__btn {
     all: unset;
     font-size: .8rem;
     cursor: pointer;
-
-    & > * {
-      color: #00bdaa;
-    }
   }
 
 }

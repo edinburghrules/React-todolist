@@ -10,7 +10,6 @@
   border-bottom: 2px solid transparent;
   cursor: pointer;
   
-
   &:hover {
     border-bottom: 2px solid #f1f1f1;
     transition: all .4s;
@@ -34,7 +33,7 @@
     display: flex;
 
     & > :first-child {
-      color: #4285F4;
+      color: #47BBFF;
       font-size: 1rem;
       margin-right: 0.6rem;
     }
