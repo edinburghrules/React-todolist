@@ -3,6 +3,10 @@
   display: flex;
   justify-content: flex-start;
 
+  @media (max-width: 450px) {
+    margin-top: 2rem;
+  }
+
 
   &__input {
     all: unset;

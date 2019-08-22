@@ -11,10 +11,14 @@ body {
   color: #333;
   box-sizing: border-box;
 
+  @media (max-width: 450px) {
+    background-color: #fff;
+  }
 }
 
 .App {
   text-align: left;
+  height:100vh;
 }
 
 
