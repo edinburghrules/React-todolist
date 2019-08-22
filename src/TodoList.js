@@ -156,6 +156,7 @@ class TodoList extends React.Component {
       if(this.state.allCompleted) {
         return (
           <button 
+            disabled={this.state.todos.length < 1}
             className="mark-all__btn mark-all__btn--incomplete" 
             onClick={this.markAllComplete}>
             <i className="fas fa-exclamation"></i>
@@ -165,6 +166,7 @@ class TodoList extends React.Component {
       } else {
         return (
           <button 
+            disabled={this.state.todos.length < 1}
             className="mark-all__btn mark-all__btn--complete" 
             onClick={this.markAllComplete}>
             <i className="fas fa-check-double"></i>
@@ -190,16 +192,18 @@ class TodoList extends React.Component {
         </div>
         <div className="line-break"></div>
         <div className="footer">
-          <p className="footer_info"><span>{incompleteTodos()}</span> todos left</p>
-          <button disabled={completeTodos() === 0}  className="footer__btn" onClick={this.hideCompleted}>
-            {this.state.hideCompleted ? 'show all' : 'hide completed'}
-          </button>
-          <button
-            disabled={completeTodos() === 0}
-            className="footer__btn footer__btn--delete-all" 
-            onClick={this.deleteCompleted}>
-            Delete all completed
-          </button>
+          <p className="footer__info"><span>{incompleteTodos()}</span> todos left</p>
+          <div className="footer__btns">
+            <button disabled={completeTodos() === 0}  className="footer__btn" onClick={this.hideCompleted}>
+              {this.state.hideCompleted ? 'show all' : 'hide completed'}
+            </button>
+            <button
+              disabled={completeTodos() === 0}
+              className="footer__btn footer__btn--delete-all" 
+              onClick={this.deleteCompleted}>
+              Delete all completed
+            </button>
+          </div>
         </div>
       </div>
     )
