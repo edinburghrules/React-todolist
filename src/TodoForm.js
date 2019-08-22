@@ -12,11 +12,12 @@ class TodoForm extends React.Component {
     this.submitTodo = this.submitTodo.bind(this);
   }
   onChange(e) {
-    if(e.target.value.length < 4) {
+    if(e.target.value.length < 4 && e.target.value.length > 0) {
       this.setState({
         error: 'Please add a todo of more than 4 letters'
       })
-    } else {
+    } 
+    else {
       this.setState({
         error: null
       })
