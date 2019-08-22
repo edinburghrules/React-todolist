@@ -136,6 +136,7 @@ class TodoList extends React.Component {
   }
   deleteCompleted() {
     this.setState(state => ({
+      allCompleted: false,
       todos: state.todos.filter(todo => {
         return !todo.completed
       })
