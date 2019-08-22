@@ -12,7 +12,8 @@ class TodoList extends React.Component {
     this.state = {
       todos: todos ? todos : [],
       searchText: '',
-      hideCompleted: false
+      hideCompleted: false,
+      allCompleted: false
     }
     this.deleteTodo = this.deleteTodo.bind(this);
     this.addTodo = this.addTodo.bind(this);
@@ -21,7 +22,6 @@ class TodoList extends React.Component {
     this.setSearchText = this.setSearchText.bind(this);
     this.hideCompleted = this.hideCompleted.bind(this);
     this.markAllComplete = this.markAllComplete.bind(this);
-    this.markAllIncomplete = this.markAllIncomplete.bind(this);
     this.deleteCompleted = this.deleteCompleted.bind(this);
   }
   addTodo(newTodo) {
@@ -112,24 +112,27 @@ class TodoList extends React.Component {
     }))
   }
   markAllComplete() {
-    this.setState(state => ({
-      todos: state.todos.map(todo => {
-        return {...todo, completed: true }
-      })
-    }))
-    setTimeout(() => {
-      localStorage.setItem('todos', JSON.stringify(this.state.todos))
-    }, 1000)
-  }
-  markAllIncomplete() {
-    this.setState(state => ({
-      todos: state.todos.map(todo => {
-        return {...todo, completed: false }
-      })
-    }))
-    setTimeout(() => {
-      localStorage.setItem('todos', JSON.stringify(this.state.todos))
-    }, 1000)
+    if (!this.state.allCompleted) {
+      this.setState(state => ({
+        allCompleted: !state.allCompleted,
+        todos: state.todos.map(todo => {
+          return {...todo, completed: true }
+        })
+      }))
+      setTimeout(() => {
+        localStorage.setItem('todos', JSON.stringify(this.state.todos))
+      }, 1000)
+    } else {
+      this.setState(state => ({
+        allCompleted: !state.allCompleted,
+        todos: state.todos.map(todo => {
+          return {...todo, completed: false }
+        })
+      }))
+      setTimeout(() => {
+        localStorage.setItem('todos', JSON.stringify(this.state.todos))
+      }, 1000)
+    }
   }
   deleteCompleted() {
     this.setState(state => ({
@@ -148,24 +151,34 @@ class TodoList extends React.Component {
     const completeTodos = () => {
       return this.state.todos.filter(todo => todo.completed).length
     }
-    return (
-      <div className="container">
-        <div>
-          <TodoForm addTodo={this.addTodo} />
-        </div>
-        <div className="mark-all">
+    const renderMarkAllBtns = () => {
+      if(this.state.allCompleted) {
+        return (
+          <button 
+            className="mark-all__btn mark-all__btn--incomplete" 
+            onClick={this.markAllComplete}>
+            <i className="fas fa-exclamation"></i>
+            Mark all incomplete
+          </button>
+        )
+      } else {
+        return (
           <button 
             className="mark-all__btn mark-all__btn--complete" 
             onClick={this.markAllComplete}>
             <i className="fas fa-check-double"></i>
             Mark all complete 
           </button>
-          <button 
-            className="mark-all__btn mark-all__btn--incomplete" 
-            onClick={this.markAllIncomplete}>
-            <i className="fas fa-exclamation"></i>
-            Mark all incomplete
-          </button>
+        )
+      }
+    }
+    return (
+      <div className="container">
+        <div>
+          <TodoForm addTodo={this.addTodo} />
+        </div>
+        <div className="mark-all">
+          {renderMarkAllBtns()}
         </div>
         <div className="line-break"></div>
         <div>

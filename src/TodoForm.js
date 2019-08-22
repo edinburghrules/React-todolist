@@ -5,25 +5,37 @@ class TodoForm extends React.Component {
     super(props);
     this.state = {
       text: '',
-      completed: false
+      completed: false,
+      error: undefined
     }
     this.onChange = this.onChange.bind(this);
     this.submitTodo = this.submitTodo.bind(this);
   }
   onChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+    if(e.target.value.length < 4) {
+      this.setState({
+        error: 'Please add a todo of more than 4 letters'
+      })
+    } else {
+      this.setState({
+        error: null
+      })
+    }
+      this.setState({
+        [e.target.name]: e.target.value
+      })
   }
   submitTodo(e) {
     e.preventDefault();
     this.props.addTodo(this.state)
     this.setState({
-      text: ''
+      text: '',
+      error: undefined
     })
   }
   render() {
     return (
+      <div>
         <form className="todo-form" onSubmit={this.submitTodo}>
           <input
             className="todo-form__input"
@@ -34,6 +46,8 @@ class TodoForm extends React.Component {
           />
           <button className="todo-form__btn"><i className="fas fa-plus"></i></button>
         </form>
+        <div className="errMsg">{this.state.error && <p>{this.state.error}</p>}</div>
+      </div>
     )
   }
 }
