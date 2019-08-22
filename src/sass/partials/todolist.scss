@@ -24,6 +24,10 @@
     border-bottom: 2px solid transparent;
     font-size: .8rem;
     cursor: pointer;
+    
+    &:disabled {
+      color: #e1e1e1;
+    }
 
     @media(max-width: 450px) {
       margin-top: .2rem;
@@ -54,6 +58,10 @@
   
       &:hover {
         border-bottom: 2px solid #00bdaa;
+
+        &:disabled {
+          border-bottom: 2px solid transparent;
+        }
       }
 
     }
@@ -96,6 +104,10 @@
 
   &__btns {
     color: #777;
+
+    & > :first-child {
+      margin-right: 2rem;
+    }
   }
 
   &__btn {
