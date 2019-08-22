@@ -1,10 +1,16 @@
 .container {
   background-color: #fff;
   width: 50%;
-  margin: 4rem auto;
+  margin: 0 auto;
   padding: 1.2rem 2rem;
   border-radius: 8px;
   box-shadow: 0px 14px 14px #ccc;
+
+  @media (max-width: 450px) {
+   width: 100vw;
+   height: 100vh;
+   padding: 1rem;
+  }
 }
 
 .mark-all {
@@ -15,6 +21,11 @@
     border-bottom: 2px solid transparent;
     font-size: .8rem;
     cursor: pointer;
+
+    @media(max-width: 450px) {
+      margin-top: .2rem;
+      font-size: 1.2rem;
+    }
 
     & > * {
       margin-right: .5rem;
@@ -41,6 +52,7 @@
       &:hover {
         border-bottom: 2px solid #00bdaa;
       }
+
     }
 
   }
@@ -51,16 +63,29 @@
   margin-top: 2rem;
   font-size: 1.5rem;
   margin-bottom: 2rem;
+
+  @media (max-width: 450px) {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
 }
 
 .line-break {
   border-bottom: 1px solid #f2f2f2;
   margin: 1rem 0 1rem 0;
+
+  @media (max-width: 450px) {
+    padding: 0 1rem;
+  }
 }
 
 .footer {
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 450px) {
+    width: 80%;
+  }
 
   &__btn {
     all: unset;
@@ -82,4 +107,5 @@
 span {
   font-weight: 600;
 }
+
 

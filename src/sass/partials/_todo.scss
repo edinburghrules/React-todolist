@@ -10,6 +10,11 @@
   margin-bottom: 1rem;
   border-bottom: 2px solid transparent;
   cursor: pointer;
+
+  @media (max-width: 450px) {
+    width: 80%;
+    font-size: 1.8rem;
+  }
   
   &:hover {
     border-bottom: 2px solid #f1f1f1;

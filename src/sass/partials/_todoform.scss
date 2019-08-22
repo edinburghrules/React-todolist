@@ -2,6 +2,9 @@
   display: flex;
   justify-content: flex-start;
 
+  @media (max-width: 450px) {
+    margin-top: 1rem;
+  }
 
   &__input {
     all: unset;
@@ -14,6 +17,13 @@
     &::placeholder {
       color: #aaa;
     }
+
+    @media (max-width: 450px) {
+      width: 70%;
+      font-size: 1.5rem;
+      height: 1.4rem;
+    }
+
   }
 
   &__btn {
@@ -49,4 +59,9 @@
   border: 2px solid transparent;
   color:#f77754;
   font-size: .8rem;
+
+  @media (max-width: 450px) {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+  }
 }
