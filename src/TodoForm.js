@@ -28,11 +28,13 @@ class TodoForm extends React.Component {
   }
   submitTodo(e) {
     e.preventDefault();
-    this.props.addTodo(this.state)
-    this.setState({
-      text: '',
-      error: undefined
-    })
+    if(this.state.text.length > 4) {
+      this.props.addTodo(this.state)
+      this.setState({
+        text: '',
+        error: undefined
+      })
+    }
   }
   render() {
     return (
